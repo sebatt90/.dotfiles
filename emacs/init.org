@@ -1,0 +1,98 @@
+#+title: My Emacs Config
+#+author: Sebastiano Babich
+#+property: header-args :tangle init.el
+
+/«Writing my config in Org mode, because why not?» - Me, 2025/
+
+* Init
+Disable noisy stuff such as the init message, the scrollbar, the menubar and the toolbar
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t)
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+#+END_SRC
+
+Disable clipboard
+#+BEGIN_SRC emacs-lisp
+  (setq x-select-enable-clipboard nil)
+#+END_SRC
+
+Display numbers on side
+#+BEGIN_SRC emacs-lisp
+  (global-display-line-numbers-mode)
+#+END_SRC
+
+Enable Iosevka font
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'default-frame-alist
+             '(font . "Iosevka-13"))
+#+END_SRC
+** ORG MODE
+#+BEGIN_SRC emacs-lisp
+  (require 'org)
+#+END_SRC
+Scale up LaTeX preview
+#+BEGIN_SRC emacs-lisp
+    (setq org-format-latex-options (plist-put org-format-latex-options :scale 3.0))
+#+END_SRC
+
+* Packages
+Use-package to handle packages
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (package-initialize)
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (eval-and-compile
+    (setq use-package-always-ensure t
+	  use-package-expand-minimally t))
+#+END_SRC
+
+Spacemacs theme
+#+BEGIN_SRC emacs-lisp
+  (use-package spacemacs-theme
+    :defer t
+    :init (load-theme 'spacemacs-dark t))
+#+END_SRC
+
+* Keybinds
+Find other file
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-o") 'ff-find-other-file)
+#+END_SRC
+** C-c modifiers
+Copy & Paste to Clipboard
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c y") 'my/paste-from-clipboard)
+  (global-set-key (kbd "C-c w") 'my/copy-to-clipboard)
+#+END_SRC
+Map goto-line to keybind
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c g") 'goto-line)
+#+END_SRC
+
+Bind query replace
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c s") 'query-replace) 
+#+END_SRC
+
+* Custom Functions
+Copy & paste to clipboard
+#+BEGIN_SRC emacs-lisp
+  (defun my/paste-from-clipboard ()
+    (interactive)
+    (setq x-select-enable-clipboard t)
+    (yank)
+    (setq x-select-enable-clipboard nil))
+
+  (defun my/copy-to-clipboard ()
+    (interactive)
+    (setq x-select-enable-clipboard t)
+    (kill-ring-save (region-beginning) (region-end))
+    (setq x-select-enable-clipboard nil))
+#+END_SRC
