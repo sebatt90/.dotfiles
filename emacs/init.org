@@ -53,7 +53,7 @@ Use-package to handle packages
 	  use-package-expand-minimally t))
 #+END_SRC
 
-Spacemacs theme
+*Spacemacs theme*
 #+BEGIN_SRC emacs-lisp
   (use-package spacemacs-theme
     :defer t
