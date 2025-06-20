@@ -96,3 +96,10 @@ Copy & paste to clipboard
     (kill-ring-save (region-beginning) (region-end))
     (setq x-select-enable-clipboard nil))
 #+END_SRC
+Interactive reload buffer
+#+BEGIN_SRC emacs-lisp
+  (defun rvbuf ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer :ignore-auto :noconfirm))
+#+END_SRC

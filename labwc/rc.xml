@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+
+<!--
+  This is a very simple config file with many options missing. For a complete
+  set of options with comments, see docs/rc.xml.all
+-->
+
+<labwc_config>
+
+  <theme>
+    <name></name>
+    <cornerRadius>8</cornerRadius>
+    <font name="Iosevka" size="11.5" />
+  </theme>
+
+  <labwc_config>
+    <desktops number="8" />
+    <keyboard>
+      <keybind key="W-1"><action name="GoToDesktop" to="1" /></keybind>
+      <keybind key="W-2"><action name="GoToDesktop" to="2" /></keybind>
+      <keybind key="W-3"><action name="GoToDesktop" to="3" /></keybind>
+      <keybind key="W-4"><action name="GoToDesktop" to="4" /></keybind>
+      <keybind key="W-5"><action name="GoToDesktop" to="5" /></keybind>
+      <keybind key="W-6"><action name="GoToDesktop" to="6" /></keybind>
+      <keybind key="W-7"><action name="GoToDesktop" to="7" /></keybind>
+      <keybind key="W-8"><action name="GoToDesktop" to="8" /></keybind>
+
+      <keybind key="W-S-1"><action name="SendToDesktop" follow="no" to="1" /></keybind>
+      <keybind key="W-S-2"><action name="SendToDesktop" follow="no" to="2" /></keybind>
+      <keybind key="W-S-3"><action name="SendToDesktop" follow="no" to="3" /></keybind>
+      <keybind key="W-S-4"><action name="SendToDesktop" follow="no" to="4" /></keybind>
+      <keybind key="W-S-5"><action name="SendToDesktop" follow="no" to="5" /></keybind>
+      <keybind key="W-S-6"><action name="SendToDesktop" follow="no" to="6" /></keybind>
+      <keybind key="W-S-7"><action name="SendToDesktop" follow="no" to="7" /></keybind>
+      <keybind key="W-S-8"><action name="SendToDesktop" follow="no" to="8" /></keybind>
+    </keyboard>
+  </labwc_config>
+
+  <!--
+    Keybind actions are specified in labwc-actions(5)
+    The following keybind modifiers are supported:
+      W - window/super/logo
+      A - alt
+      C - ctrl
+      S - shift
+
+    Use <keyboard><default /> to load all the default keybinds (those listed
+    below). If the default keybinds are largely what you want, a sensible
+    approach could be to start the <keyboard> section with a <default />
+    element, and then (re-)define any special binds you need such as launching
+    your favourite terminal or application launcher. See rc.xml for an example.
+  -->
+  <keyboard>
+    <!--
+      # Numlock is not set by default
+      <numlock>on|off</numlock>
+    -->
+    <layoutScope>global</layoutScope>
+    <repeatRate>25</repeatRate>
+    <repeatDelay>600</repeatDelay>
+    <keybind key="A-Tab">
+      <action name="NextWindow" />
+    </keybind>
+    <keybind key="A-S-Tab">
+      <action name="PreviousWindow" />
+    </keybind>
+    <keybind key="W-Return">
+      <action name="Execute" command="foot" />
+    </keybind>
+    <keybind key="W-S-Return">
+      <action name="Execute" command="dolphin" />
+    </keybind>
+    <keybind key="W-d">
+      <action name="Execute" command="wofi -S drun" />
+    </keybind>
+    <keybind key="W-S-q">
+      <action name="Close" />
+    </keybind>
+    <keybind key="W--">
+      <action name="Iconify" />
+    </keybind>
+    <keybind key="W-g">
+      <action name="ToggleDecorations" />
+    </keybind>
+    <keybind key="W-f">
+      <action name="ToggleMaximize" />
+    </keybind>
+    <keybind key="W-Left">
+      <action name="MoveToEdge" direction="left" />
+    </keybind>
+    <keybind key="W-Right">
+      <action name="MoveToEdge" direction="right" />
+    </keybind>
+    <keybind key="W-Up">
+      <action name="MoveToEdge" direction="up" />
+    </keybind>
+    <keybind key="W-Down">
+      <action name="MoveToEdge" direction="down" />
+    </keybind>
+    <keybind key="W-Left">
+      <action name="SnapToEdge" direction="left" />
+    </keybind>
+    <keybind key="W-Right">
+      <action name="SnapToEdge" direction="right" />
+    </keybind>
+    <keybind key="W-Up">
+      <action name="SnapToEdge" direction="up" />
+    </keybind>
+    <keybind key="W-Down">
+      <action name="SnapToEdge" direction="down" />
+    </keybind>
+    <keybind key="W-Space">
+      <action name="ShowMenu" menu="client-menu" atCursor="no" />
+    </keybind>
+    <keybind key="XF86_AudioLowerVolume">
+      <action name="Execute" command="amixer sset Master 5%-" />
+    </keybind>
+    <keybind key="XF86_AudioRaiseVolume">
+      <action name="Execute" command="amixer sset Master 5%+" />
+    </keybind>
+    <keybind key="XF86_AudioMute">
+      <action name="Execute" command="amixer sset Master toggle" />
+    </keybind>
+    <keybind key="XF86_MonBrightnessUp">
+      <action name="Execute" command="brightnessctl set +10%" />
+    </keybind>
+    <keybind key="XF86_MonBrightnessDown">
+      <action name="Execute" command="brightnessctl set 10%-" />
+    </keybind>
+  <!-- SnapToRegion via W-Numpad -->
+  <!--
+    <keybind key="W-KP_7">
+      <action name="SnapToRegion" region="top-left" />
+    </keybind>
+    <keybind key="W-KP_8">
+      <action name="SnapToRegion" region="top" />
+    </keybind>
+    <keybind key="W-KP_9">
+      <action name="SnapToRegion" region="top-right" />
+    </keybind>
+    <keybind key="W-KP_4">
+      <action name="SnapToRegion" region="left" />
+    </keybind>
+    <keybind key="W-KP_5">
+      <action name="SnapToRegion" region="center" />
+    </keybind>
+    <keybind key="W-KP_6">
+      <action name="SnapToRegion" region="right" />
+    </keybind>
+    <keybind key="W-KP_1">
+      <action name="SnapToRegion" region="bottom-left" />
+    </keybind>
+    <keybind key="W-KP_2">
+      <action name="SnapToRegion" region="bottom" />
+    </keybind>
+    <keybind key="W-KP_3">
+      <action name="SnapToRegion" region="bottom-right" />
+    </keybind>
+  -->
+  <!-- keybind for client-list-combined-menu - will center in middle of screen -->
+  <!--
+    <keybind key="W-Space">
+      <action name="ShowMenu" menu="client-list-combined-menu" />
+      <position>
+        <x>center</x>
+        <y>center</y>
+      </position>
+    </keybind>
+  -->
+  </keyboard>
+
+  <mouse>
+    <default />
+    <!-- Show a custom menu on desktop right click -->
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu" menu="some-custom-menu" />
+      </mousebind>
+
+    </context>
+
+    <!-- Regarding windows -->
+    <context name="Frame">
+      <!-- Resize window with super -->
+      <mousebind button="W-Right" action="Drag">
+	<action name="Resize" />
+      </mousebind>
+      <!-- Move window with super like a sane human being -->
+      <mousebind button="W-Left" action="Drag">
+        <action name="Move" />
+      </mousebind>
+    </context>
+  </mouse>
+
+</labwc_config>
