@@ -21,12 +21,41 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-and-compile
-  (setq use-package-always-ensure t
-	  use-package-expand-minimally t))
+;; package list
+(setq my-packages
+      '(
+	use-package
+	magit
+	rust-mode
+	go-mode
+	multiple-cursors
+	
+	;; themes and customization
+	spacemacs-theme
+	doom-modeline
+	nerd-icons
+
+	;; other
+	ox-hugo
+	))
+
+
+(defun my/install-packages ()
+  "Automatically install packages in `my-packages' if missing."
+  ;; Refresh package metadata (optional but ensures latest versions)
+  (unless package-archive-contents
+    (package-refresh-contents))
+  ;; Iterate over `my-packages' and install missing ones
+  (dolist (package my-packages)
+    (unless (package-installed-p package)
+      (message "Installing missing package: %s" package)
+      (package-install package))))
+ 
+;; Run the installation function when Emacs starts
+(my/install-packages)
+
+
+(require 'multiple-cursors)
 
 (use-package rust-mode
   :defer t
@@ -69,6 +98,11 @@
 
 (global-set-key (kbd "C-c s") 'query-replace)
 
+;; multiple cursors
+(global-set-key (kbd "M-n") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-#") 'mc/mark-all-like-this)
+
+;; function def ;;
 (defun my/paste-from-clipboard ()
   (interactive)
   (setq x-select-enable-clipboard t)
@@ -90,9 +124,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(doom-modeline magit multiple-cursors org-evil ox-hugo rust-mode
-		   spacemacs-theme svelte-mode)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
