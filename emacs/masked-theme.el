@@ -37,11 +37,10 @@
 	  (masked-bg+2        "#2f2f4d")
 	  (masked-bg+1        "#222238")
 	  (masked-bg+01       "#0f0f10")
-	  (masked-bg+00       "#121212")
 	  (masked-bg          "#232323")
-	  (masked-bg-alt      "#0e0e0e")
+	  (masked-bg-alt      "#202020")
 
-	  (masked-ws          "#121212")
+	  (masked-ws          "#363636")
 
 	  (masked-red         "#a34443")
 	  (masked-green       "#8ba446")
@@ -108,9 +107,9 @@
    ;; general
    `(cursor ((t (:background ,masked-gold))))
    `(default ((t (:foreground ,masked-fg :background ,masked-bg))))
-   `(fringe ((t (:foreground ,masked-fg :background ,masked-bg+00))))
+   `(fringe ((t (:foreground ,masked-fg :background ,masked-bg))))
    `(minibuffer-prompt ((t (:foreground ,masked-white))))
-   `(region ((t (:foreground ,masked-white :background ,masked-blue-alt))))
+   `(region ((t (:foreground ,masked-white :background ,masked-ws))))
    `(link ((t (:foreground ,masked-magenta-alt :underline t))))
    `(link-visited ((t (:foreground ,masked-magenta :underline t))))
 
@@ -118,8 +117,8 @@
    `(highlight-numbers-number ((t (:foreground ,masked-red))))
 
    ;; line-numbers
-   `(line-number ((t (:inherit default :foreground ,masked-bg+1 :background ,masked-bg-alt))))
-   `(line-number-current-line ((t (:inherit line-number :foreground ,masked-bg+2 :background ,masked-bg-alt
+   `(line-number ((t (:inherit default :foreground ,masked-fg-1 :background ,masked-bg-alt))))
+   `(line-number-current-line ((t (:inherit line-number :foreground ,masked-fg-2 :background ,masked-bg-alt
 											:weight ,bold))))
 
    ;; mode-line
