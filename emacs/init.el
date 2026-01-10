@@ -3,6 +3,8 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
+
+
 (setq x-select-enable-clipboard nil)
 
 (global-display-line-numbers-mode)
@@ -29,6 +31,8 @@
 	rust-mode
 	go-mode
 	multiple-cursors
+	company
+	smex
 	
 	;; themes and customization
 	spacemacs-theme
@@ -54,40 +58,60 @@
 ;; Run the installation function when Emacs starts
 (my/install-packages)
 
+;; theme
+(load "~/.emacs.d/masked-theme")
 
+(load-theme 'masked t)
+      
+;; smex
+(require 'smex)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+;; setup company mode
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; setup multiple cursors
 (require 'multiple-cursors)
 
-(use-package rust-mode
-  :defer t
-  :init (require 'rust-mode))
+;; (use-package rust-mode
+;;   :defer t
+;;   :init (require 'rust-mode))
 
-(use-package magit
-  :defer t
-  :init (require 'magit))
+;; (use-package magit
+;;   :defer t
+;;   :init (require 'magit))
 
-(use-package spacemacs-theme
-  :defer t
-  :init (load-theme 'spacemacs-dark t))
+;; (use-package spacemacs-theme
+;;   :defer t
+;;   :init (load-theme 'spacemacs-dark t))
 
-(use-package nerd-icons
-  ;; :custom
-  ;; The Nerd Font you want to use in GUI
-  ;; "Symbols Nerd Font Mono" is the default and is recommended
-  ;; but you can use any other Nerd Font if you want
-  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
-  )
+;; (use-package nerd-icons
+;;   ;; :custom
+;;   ;; The Nerd Font you want to use in GUI
+;;   ;; "Symbols Nerd Font Mono" is the default and is recommended
+;;   ;; but you can use any other Nerd Font if you want
+;;   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+;;   )
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1))
 
-(use-package ox-hugo
-  :ensure t   ;Auto-install the package from Melpa
-  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
-  :after ox)
+;; (use-package ox-hugo
+;;   :ensure t   ;Auto-install the package from Melpa
+;;   :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+;;   :after ox)
 
-(with-eval-after-load 'ox
-  (require 'ox-hugo))
+;; (with-eval-after-load 'ox
+;;   (require 'ox-hugo))
+
+;; setup rust mode
+(require 'rust-mode)
+
+;; setup magit
+(require 'magit)
+
 
 (global-set-key (kbd "C-x C-o") 'ff-find-other-file)
 
